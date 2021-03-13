@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/eloisetaylor5693/get-npm-dependancies/issues"
   },
-  "homepage": "https://github.com/eloisetaylor5693/get-npm-dependancies#readme"
+  "homepage": "https://github.com/eloisetaylor5693/get-npm-dependancies#readme",
+  "devDependencies": {
+    "get-dependencies": "^1.1.0"
+  }
 }
