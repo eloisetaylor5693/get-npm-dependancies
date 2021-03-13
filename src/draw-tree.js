@@ -1,10 +1,10 @@
 const rootContainer = document.getElementById('tree-container');
-addBranch("Snyk", rootContainer, 0, true);
+addBranchWithDependencies("Snyk", rootContainer, 0);
 
 const level0Container = document.getElementById('0-Snyk-dependencies');
-addBranch("momentjs", level0Container, 1, false);
+addBranch("momentjs", level0Container);
 
-function addBranch(packageName, parentElement, treeLevel, hasDependencies) {
+function addBranchWithDependencies(packageName, parentElement, treeLevel) {
     const id = `${treeLevel}-${packageName}`;
 
     const checkbox = document.createElement('input');
@@ -16,15 +16,24 @@ function addBranch(packageName, parentElement, treeLevel, hasDependencies) {
     label.innerText = packageName;
     label.setAttribute('for', id);
 
+    const packageDependencies = document.createElement('ul')
+    packageDependencies.id = `${id}-dependencies`;
+
     const listItem = document.createElement('li');
     listItem.appendChild(checkbox);
     listItem.appendChild(label);
+    listItem.appendChild(packageDependencies);
 
-    if (hasDependencies) {
-        const packageDependencies = document.createElement('ul')
-        packageDependencies.id = `${id}-dependencies`;
-        listItem.appendChild(packageDependencies);
-    }
-    
+    parentElement.appendChild(listItem);
+}
+
+function addBranch(packageName, parentElement) {
+    const label = document.createElement('span');
+    label.className = "tree_label";
+    label.innerText = packageName;
+
+    const listItem = document.createElement('li');
+    listItem.appendChild(label);
+
     parentElement.appendChild(listItem);
 }
