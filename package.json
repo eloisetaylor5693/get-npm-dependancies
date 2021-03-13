@@ -1,0 +1,22 @@
+{
+  "name": "get-npm-dependancies",
+  "version": "1.0.0",
+  "description": "Get all dependancies for a given npm package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eloisetaylor5693/get-npm-dependancies.git"
+  },
+  "keywords": [
+    "dependencies"
+  ],
+  "author": "Eloise Taylor",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eloisetaylor5693/get-npm-dependancies/issues"
+  },
+  "homepage": "https://github.com/eloisetaylor5693/get-npm-dependancies#readme"
+}
