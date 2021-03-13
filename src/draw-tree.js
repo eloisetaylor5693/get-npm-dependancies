@@ -1,3 +1,7 @@
+const testAttributeName = 'data-test';
+const testAttribute_checkbox = 'toggleDependenciesToShow';
+const testAttribute_label = 'labelPackageName';
+
 const rootContainer = document.getElementById('tree-container');
 addBranchWithDependencies("Snyk", rootContainer, 0);
 
@@ -10,11 +14,13 @@ function addBranchWithDependencies(packageName, parentElement, treeLevel) {
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.id = id;
+    checkbox.setAttribute(testAttributeName, testAttribute_checkbox);
 
     const label = document.createElement('label');
     label.className = "tree_label";
     label.innerText = packageName;
     label.setAttribute('for', id);
+    label.setAttribute(testAttributeName, testAttribute_label);
 
     const packageDependencies = document.createElement('ul')
     packageDependencies.id = `${id}-dependencies`;
@@ -31,6 +37,7 @@ function addBranch(packageName, parentElement) {
     const label = document.createElement('span');
     label.className = "tree_label";
     label.innerText = packageName;
+    label.setAttribute(testAttributeName, testAttribute_label);
 
     const listItem = document.createElement('li');
     listItem.appendChild(label);
