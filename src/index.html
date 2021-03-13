@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Get Dependency Tree For NPM Package</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+</head>
+
+<body>
+  <!-- Wrapper for the tree structure -->
+  <ul class="tree" id="tree-container">
+
+    <!--  Example format of the tree-->
+    <li>
+      <input type="checkbox" id="c5" />
+      <label class="tree_label" for="c5">Level 0</label>
+      <ul>
+        <li>
+          <input type="checkbox" id="c6" />
+          <label for="c6" class="tree_label">Level 1</label>
+          <ul>
+            <li><span class="tree_label">Level 2</span></li>
+          </ul>
+        </li>
+        <li>
+          <input type="checkbox" id="c7" />
+          <label for="c7" class="tree_label">Level 1</label>
+          <ul>
+            <li><span class="tree_label">Level 2</span></li>
+            <li>
+              <input type="checkbox" id="c8" />
+              <label for="c8" class="tree_label">Level 2</label>
+              <ul>
+                <li><span class="tree_label">Level 3</span></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script src="./draw-tree.js"></script>
+
+</body>
+
+</html>
