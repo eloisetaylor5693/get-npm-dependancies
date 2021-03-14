@@ -8,4 +8,7 @@ fetch("http://localhost:5000" + window.location.search)
       const level0Container = document.getElementById(`0-${packageInfo.package}-dependencies`);
       addBranch(package, level0Container);
     });
+  })
+  .catch(error => {
+    writeErrorMessage(error.message);
   });

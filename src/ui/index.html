@@ -15,6 +15,8 @@
   <h1>Get dependency tree for an npm package!</h1>
   <p>Please amend the url to include the package you want to see dependencies of.  Eg <code>file:///C:/Code/tech-tests/snyk/index.html?package=snyk</code></code></p>
 
+  <div id="error-container"></div>
+
   <!-- Wrapper for the tree structure -->
   <ul class="tree" id="tree-container">
 
@@ -50,6 +52,7 @@
   </ul>
 
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script src="./draw-error.js"></script>
   <script src="./draw-tree.js"></script>
   <script src="./index.js"></script>
 
