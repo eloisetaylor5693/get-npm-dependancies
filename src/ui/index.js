@@ -1,4 +1,4 @@
 fetch("http://localhost:5000" + window.location.search)
-  .then(response => {
-    console.log(response.json());
-  })
+  .then(response => response.json())
+  .then(data => console.log(data));
+  
