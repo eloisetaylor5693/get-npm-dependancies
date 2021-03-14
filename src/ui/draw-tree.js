@@ -2,12 +2,6 @@ const testAttributeName = 'data-test';
 const testAttribute_checkbox = 'toggleDependenciesToShow';
 const testAttribute_label = 'labelPackageName';
 
-const rootContainer = document.getElementById('tree-container');
-addBranchWithDependencies("Snyk", rootContainer, 0);
-
-const level0Container = document.getElementById('0-Snyk-dependencies');
-addBranch("momentjs", level0Container);
-
 function addBranchWithDependencies(packageName, parentElement, treeLevel) {
     const id = `${treeLevel}-${packageName}`;
 

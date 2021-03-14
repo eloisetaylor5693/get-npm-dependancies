@@ -17,7 +17,9 @@ exports.GetDependencies = async (packageName) => {
 
         dependencies = await getDeps.getByName(packageName)
             .then((result) => {
-                return result;
+                return {
+                    package: packageName,
+                    dependencies: result};
             })
             .catch(err => { console.log(err.message); });
 
