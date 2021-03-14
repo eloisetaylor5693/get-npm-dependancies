@@ -5,6 +5,9 @@ const oneMinuteInMs = 60000;
 const cacheTtl = oneMinuteInMs * 60;
 
 exports.GetDependencies = async (packageName) => {
+    if (!packageName){
+        throw new Error('No npm package specified.  Please amend the url and try again.')
+    }
     
     const dependencyCache = new Cache(cacheTtl, 'cache-data.json');
 

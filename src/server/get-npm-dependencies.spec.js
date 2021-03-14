@@ -6,24 +6,28 @@ describe('given a package that exists in npm', () => {
     const result = await sut.GetDependencies('snyk');
 
     expect(result).to.not.be.null;
-    expect(result).to.be.an('array').that.includes("diff");
+    expect(result.dependencies).to.be.an('array').that.includes("diff");
   });
 });
 
 describe('given no package', () => {
   describe('when empty', () => {
-    it('then should return dependencies', async () => {
-      const result = await sut.GetDependencies('');
-  
-      expect(result).to.not.be.null;
+    it('then should throw error', async () => {
+      try {
+        await sut.GetDependencies(null);
+      } catch (error) {
+        expect(error.message).to.equal('No npm package specified.  Please amend the url and try again.');
+      }
     });
   });
- 
+
   describe('when null', () => {
-    it('then should return dependencies', async () => {
-      const result = await sut.GetDependencies(null);
-  
-      expect(result).to.not.be.null;
+    it('then should throw error', async () => {
+      try {
+        await sut.GetDependencies(null);
+      } catch (error) {
+        expect(error.message).to.equal('No npm package specified.  Please amend the url and try again.');
+      }
     });
-  });  
+  });
 });
