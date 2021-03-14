@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "serve": "node ./src/server/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --recursive ./**/*.spec.js"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,9 @@
   },
   "homepage": "https://github.com/eloisetaylor5693/get-npm-dependancies#readme",
   "devDependencies": {
-    "get-dependencies": "^1.1.0"
+    "chai": "^4.3.4",
+    "get-dependencies": "^1.1.0",
+    "mocha": "^8.3.2"
   },
   "dependencies": {
     "cache": "^2.3.1"
