@@ -8,6 +8,9 @@ function addBranchWithDependencies(packageName, parentElement, treeLevel) {
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.id = id;
+
+    // checking the checkbox so the list shows expanded
+    checkbox.setAttribute('checked', 'checked');
     checkbox.setAttribute(testAttributeName, testAttribute_checkbox);
 
     const label = document.createElement('label');
