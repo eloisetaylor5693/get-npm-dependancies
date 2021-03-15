@@ -14,9 +14,9 @@ const GetDependencies = async (packageName) => {
     let dependencies = dependencyCache.get(packageName);
 
     if (dependencies) {
-        console.log('Got dependencies from cache');
+        console.log(`Got dependencies from cache ${packageName}`);
     } else {
-        console.log('Getting dependencies from API');
+        console.log(`Getting dependencies from API ${packageName}`);
 
         dependencies = await getDeps.getByName(packageName)
             .then(data => data)
