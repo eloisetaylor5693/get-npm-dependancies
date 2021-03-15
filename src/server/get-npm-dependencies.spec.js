@@ -53,12 +53,11 @@ describe('GetAllDependencies', () => {
       const result = await sut.GetAllDependencies('snyk');
 
       expect(result).to.not.be.null;
-      expect(result.dependencies).to.be.an('array').that.includes("diff");
-      done();
+      expect(result.dependencies.length).to.be.greaterThan(5);
     });
   });
 
-  
+
   describe('given an unknown package', () => {
     it('should throw error', async () => {
       const packageName = 'kajhsegkjshbgdkj h iurhgiuawhgiuahgiuahiughawiurghaiurw';
