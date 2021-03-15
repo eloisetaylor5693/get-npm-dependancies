@@ -6,35 +6,32 @@ const headers = {
     'Access-Control-Allow-Origin': '*'
 };
 
-const server = http.createServer(async function (req, res) {
+const server = http.createServer(async function (request, response) {
 
-    console.log(req.url);
-    const packageName = req.url.replace('/?package=', '');
+    console.log(request.url);
+    const packageName = request.url.replace('/?package=', '');
 
     if (packageName === '/') {
-        res.writeHead(200, headers);
-        const response = JSON.stringify({ error: 'Please give an npm package in the url' });
-        res.write(response);
-        res.end();
-
+        writeResponse(response, 400, { error: 'Please give an npm package in the url' });
         return;
     }
     console.log(packageName);
 
     await getDeps.GetAllDependencies(packageName)
         .then(data => {
-            res.writeHead(200, headers);
-            const response = JSON.stringify(data);
-            res.write(response);
-            res.end();
+            writeResponse(response, 200, data);
         })
         .catch(error => {
-            res.writeHead(400, headers);
-            const response = JSON.stringify({ error: error.message });
-            res.write(response);
-            res.end();
+            writeResponse(response, 400, { error: error.message });
         });
 });
+
+function writeResponse(response, httpStatusCode, data) {
+    response.writeHead(httpStatusCode, headers);
+    const responseBody = JSON.stringify(data);
+    response.write(responseBody);
+    response.end();
+}
 
 server.listen(5000);
 
