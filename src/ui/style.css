@@ -10,3 +10,16 @@ h1 {
 .error {
     color: red;
 }
+
+strong {
+    font-weight: bold;
+}
+
+code {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+sub {
+    font-style: italic;
+    font-size: 0.75em
+}
