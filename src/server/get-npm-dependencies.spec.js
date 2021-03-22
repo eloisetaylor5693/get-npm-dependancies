@@ -26,11 +26,13 @@ describe('GetDependencies', () => {
   describe('given no package', () => {
     describe('when empty', () => {
       it('then should throw error', async () => {
+        let result;
         try {
-          await sut.GetDependencies(null);
+          result = await sut.GetDependencies(null);
         } catch (error) {
           expect(error.message).to.equal('No npm package specified.  Please amend the url and try again.');
         }
+        expect(result).to.be.undefined;
       });
     });
 
