@@ -49,10 +49,10 @@ describe('GetDependencies', () => {
 
 });
 
-describe('GetAllDependencies', () => {
+describe('GetDependenciesAndSubDependencies', () => {
   describe('given a package that exists in npm', () => {
     it('then should return dependencies', async () => {
-      const result = await sut.GetAllDependencies('snyk');
+      const result = await sut.GetDependenciesAndSubDependencies('snyk');
 
       expect(result).to.not.be.null;
       expect(result.dependencies.length).to.be.greaterThan(5);
@@ -64,7 +64,7 @@ describe('GetAllDependencies', () => {
     it('should throw error', async () => {
       const packageName = 'kajhsegkjshbgdkj h iurhgiuawhgiuahgiuahiughawiurghaiurw';
       try {
-        await sut.GetAllDependencies(packageName);
+        await sut.GetDependenciesAndSubDependencies(packageName);
       } catch (error) {
         expect(error.message).to.equal(`Package \`${packageName}\` doesn't exist`);
       }
@@ -75,7 +75,7 @@ describe('GetAllDependencies', () => {
     describe('when empty', () => {
       it('then should throw error', async () => {
         try {
-          await sut.GetAllDependencies(null);
+          await sut.GetDependenciesAndSubDependencies(null);
         } catch (error) {
           expect(error.message).to.equal('No npm package specified.  Please amend the url and try again.');
         }
@@ -85,11 +85,22 @@ describe('GetAllDependencies', () => {
     describe('when null', () => {
       it('then should throw error', async () => {
         try {
-          await sut.GetAllDependencies(null);
+          await sut.GetDependenciesAndSubDependencies(null);
         } catch (error) {
           expect(error.message).to.equal('No npm package specified.  Please amend the url and try again.');
         }
       });
     });
+  });
+});
+
+describe.only('GetAllDependencies', () => {
+  it('should return ALL dependencies', async () => {
+    const result = await sut.GetAllDependencies('time');
+
+    console.log(result);
+
+    expect(result).to.not.be.null;
+    expect(result.dependencies.length).to.be.greaterThan(5);
   });
 });

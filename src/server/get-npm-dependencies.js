@@ -16,9 +16,9 @@ const GetDependencies = async (packageName) => {
     let dependencies = dependencyCache.get(packageName);
 
     if (dependencies) {
-        console.log(`Got dependencies from cache ${packageName}`);
+        // console.log(`Got dependencies from cache ${packageName}`);
     } else {
-        console.log(`Getting dependencies from API ${packageName}`);
+        // console.log(`Getting dependencies from API ${packageName}`);
 
         dependencies = await axios.get(`https://registry.npmjs.org/${packageName}/latest`)
         //await getDeps.getByName(packageName)
@@ -42,7 +42,40 @@ const GetDependencies = async (packageName) => {
 };
 
 
+// response structure:
+    // [ {
+    //         package: 'snyk',
+    //         dependencies: {
+    //             [
+    //                 {
+    //                     package: 'diff',
+    //                 }
+    //             ]
+
+    //         }
+    //     }
+    // ]
+
+
 exports.GetAllDependencies = async (packageName) => {
+
+    console.log(packageName);
+
+    const dependencies = await GetDependencies(packageName)
+        .then(data => data)
+        .then(data => data.dependencies.map(x => {
+            return this.GetAllDependencies(x);
+        }))
+        .catch(error => {
+            console.log(error.message)
+            throw new Error(error.message)
+        });
+    
+    return Promise.all(dependencies);
+}
+
+
+exports.GetDependenciesAndSubDependencies = async (packageName) => {
     if (!packageName) {
         throw new Error('No npm package specified.  Please amend the url and try again.');
     }
