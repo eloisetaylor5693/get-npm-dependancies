@@ -1,5 +1,7 @@
 const getDeps = require('get-dependencies');
 Cache = require('cache');
+const needle = require('needle');
+const axios = require('axios');
 
 const oneMinuteInMs = 60000;
 const cacheTtl = oneMinuteInMs * 60;
@@ -18,12 +20,18 @@ const GetDependencies = async (packageName) => {
     } else {
         console.log(`Getting dependencies from API ${packageName}`);
 
-        dependencies = await getDeps.getByName(packageName)
-            .then(data => data)
+        dependencies = await axios.get(`https://registry.npmjs.org/${packageName}/latest`)
+        //await getDeps.getByName(packageName)
+            .then(response => response.data)
+            .then(data => data.dependencies.filter(x => x))
             .then((result) => {
+                const dependencyKeys = Object.keys(result.dependencies);
+                console.log(dependencyKeys);
+                const dependencies = dependencyKeys.filter(x => x);
                 return {
                     package: packageName,
-                    dependencies: result
+                    dependencies: dependencies,
+                    version: result.version
                 };
             });
 
