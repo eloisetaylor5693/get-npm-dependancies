@@ -2,6 +2,21 @@ const testAttributeName = 'data-test';
 const testAttribute_checkbox = 'toggleDependenciesToShow';
 const testAttribute_label = 'labelPackageName';
 
+function drawFullTreeOfDependencies(packageInfo){
+    const rootContainer = document.getElementById('tree-container');
+    addBranchWithDependencies(packageInfo.package, rootContainer, 0);
+
+    packageInfo.dependencies.map(package => {
+      const level0Container = document.getElementById(`0-${packageInfo.package}-dependencies`);
+      addBranchWithDependencies(package.package, level0Container, 1);
+
+      package.dependencies.map(parent => {
+        const level1Container = document.getElementById(`1-${package.package}-dependencies`);
+        parent.map(child => addBranch(child, level1Container));
+      })
+    });
+}
+
 function addBranchWithDependencies(packageName, parentElement, treeLevel) {
     const id = `${treeLevel}-${packageName}`;
 
