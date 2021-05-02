@@ -22,7 +22,8 @@ const server = http.createServer(async function (request, response) {
             writeResponse(response, 200, data);
         })
         .catch(error => {
-            writeResponse(response, 400, { error: error.message });
+            console.log(error);
+            writeResponse(response, 400, { ...error });
         });
 });
 
