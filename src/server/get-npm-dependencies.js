@@ -1,4 +1,4 @@
-const getDeps = require('get-dependencies');
+const axios = require('axios');
 Cache = require('cache');
 
 const oneMinuteInMs = 60000;
@@ -8,27 +8,27 @@ const GetDependencies = async (packageName) => {
     if (!packageName) {
         throw new Error('No npm package specified.  Please amend the url and try again.')
     }
+    console.log(packageName);
 
-    const dependencyCache = new Cache(cacheTtl, 'cache-data.json');
 
-    let dependencies = dependencyCache.get(packageName);
+    let dependencies = await axios.get(`https://registry.npmjs.org/${packageName}/latest`)
+        .then(response => {
+            return response.data;
+        })
+        .then(response => {
+            if (!response.dependencies) {
+                return;
+            }
 
-    if (dependencies) {
-        console.log(`Got dependencies from cache ${packageName}`);
-    } else {
-        console.log(`Getting dependencies from API ${packageName}`);
+            const dependencyObjectKeys = Object.keys(response.dependencies);
+            const dependencies = dependencyObjectKeys.filter(x => x) 
 
-        dependencies = await getDeps.getByName(packageName)
-            .then(data => data)
-            .then((result) => {
-                return {
-                    package: packageName,
-                    dependencies: result
-                };
-            });
-
-        dependencyCache.put(packageName, dependencies);
-    }
+            return {
+                package: packageName,
+                dependencies: dependencies,
+                version: response.version
+            }
+        });
 
     return dependencies;
 };
@@ -63,6 +63,7 @@ exports.GetAllDependencies = async (packageName) => {
                         return {
                             package: x,
                             dependencies: results
+                                .filter(a => a)
                                 .filter(y => y.package === x)
                                 .map(z => z.dependencies)
                         }

@@ -26,7 +26,7 @@
     "mocha": "^8.3.2"
   },
   "dependencies": {
-    "cache": "^2.3.1",
-    "get-dependencies": "^1.1.0"
+    "axios": "^0.21.1",
+    "cache": "^2.3.1"
   }
 }
